@@ -1,5 +1,6 @@
 package nat.impl;
 
+import nat.StringUtil;
 import nat.Nat;
 import nat.NatFactory;
 import nat.Operation;
@@ -24,10 +25,10 @@ public class NatFactoryImpl implements NatFactory {
 	
 	@Override
 	public Operation getOperation(String name) throws OperationNotFoundException {
-		if(name.charAt(0) == 'A')
-			if(name.charAt(1) == 'D')
-				if(name.charAt(2) == 'D')
-					if(name.length() == 3)
+		if(StringUtil.charAt(this, name, getZero()) == 'A')
+			if(StringUtil.charAt(this, name, getOne()) == 'D')
+				if(StringUtil.charAt(this, name, getOne().successor()) == 'D')
+					if(StringUtil.strLength(this, name).equals(getOne().successor().successor()))
 						return new AddImpl(this);
 					else
 						throw new OperationNotFoundException(name);
@@ -35,10 +36,10 @@ public class NatFactoryImpl implements NatFactory {
 					throw new OperationNotFoundException(name);
 			else
 				throw new OperationNotFoundException(name);
-		else if(name.charAt(0) == 'D')
-			if(name.charAt(1) == 'I')
-				if(name.charAt(2) == 'V')
-					if(name.length() == 3)
+		else if(StringUtil.charAt(this, name, getZero()) == 'D')
+			if(StringUtil.charAt(this, name, getOne()) == 'I')
+				if(StringUtil.charAt(this, name, getOne().successor()) == 'V')
+					if(StringUtil.strLength(this, name).equals(getOne().successor().successor()))
 						return new DivImpl(this);
 					else
 						throw new OperationNotFoundException(name);
@@ -46,10 +47,10 @@ public class NatFactoryImpl implements NatFactory {
 					throw new OperationNotFoundException(name);
 			else
 				throw new OperationNotFoundException(name);
-		else if(name.charAt(0) == 'M')
-			if(name.charAt(1) == 'O')
-				if(name.charAt(2) == 'D')
-					if(name.length() == 3)
+		else if(StringUtil.charAt(this, name, getZero()) == 'M')
+			if(StringUtil.charAt(this, name, getOne()) == 'O')
+				if(StringUtil.charAt(this, name, getOne().successor()) == 'D')
+					if(StringUtil.strLength(this, name).equals(getOne().successor().successor()))
 						return new ModImpl(this);
 					else
 						throw new OperationNotFoundException(name);
